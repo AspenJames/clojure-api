@@ -1,23 +1,17 @@
 (ns clojure-api.core
   "Example HTTP API."
   (:gen-class)
-  (:require [clojure.tools.cli :refer [parse-opts]]
-            [compojure.core :refer [defroutes
-                                    GET]]
-            [compojure.route :refer [not-found]]
+  (:require [clojure-api.api :refer [app]]
+            [clojure.tools.cli :refer [parse-opts]]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.defaults :refer [api-defaults
                                               wrap-defaults]]))
 
 (defonce server (atom nil))
 
-(defroutes app
-  (GET "/" [] "Placeholder")
-  (not-found "Route not found"))
-
 (defn run-server!
   "Run the API server on the specified port."
-  [port]
+  [app port]
   (try
     (reset! server (run-jetty (-> #'app
                                   (wrap-defaults api-defaults))
@@ -45,4 +39,4 @@
         port (get-in options [:options :port])
         errors (get options :errors nil)
         _ (when-not (nil? errors) (apply println "ERROR:" errors))]
-    (run-server! port)))
+    (run-server! app port)))
