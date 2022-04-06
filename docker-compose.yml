@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  server:
+    restart: 'unless-stopped'
+    ports:
+      - '4200:4200'
+    build:
+      dockerfile: server.Dockerfile
+      context: .
+      args:
+        API_PORT: 4200
+        APP_DIR: /usr/src/app
+
+  repl:
+    restart: 'unless-stopped'
+    ports:
+      - '7888:7888' # nrepl
+      - '4200:4200' # API
+    build:
+      dockerfile: repl.Dockerfile
+      context: .
+      args:
+        REPL_PORT: 7888
+        APP_DIR: /usr/src/app
+    volumes:
+      - .:/usr/src/app
