@@ -4,24 +4,24 @@ services:
   server:
     restart: 'unless-stopped'
     ports:
-      - '4200:4200'
+      - $API_PORT:$API_PORT
     build:
       dockerfile: server.Dockerfile
       context: .
       args:
-        API_PORT: 4200
-        APP_DIR: /usr/src/app
+        API_PORT: $API_PORT
+        APP_DIR: $APP_DIR
 
   repl:
     restart: 'unless-stopped'
     ports:
-      - '7888:7888' # nrepl
-      - '4200:4200' # API
+      - $API_PORT:$API_PORT
+      - $REPL_PORT:$REPL_PORT
     build:
       dockerfile: repl.Dockerfile
       context: .
       args:
-        REPL_PORT: 7888
-        APP_DIR: /usr/src/app
+        REPL_PORT: $REPL_PORT
+        APP_DIR: $APP_DIR
     volumes:
-      - .:/usr/src/app
+      - .:$APP_DIR

@@ -8,6 +8,10 @@ Clone from GitHub:
 
     $ git clone https://github.com/AspenJames/clojure-api.git
 
+Setup `.env` file:
+
+    $ cp .env.sample .env
+
 
 ## Usage
 
