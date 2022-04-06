@@ -1,36 +1,57 @@
 # clojure-api
 
-FIXME: description
+Basic API -- Clojure learning project.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Clone from GitHub:
+
+    $ git clone https://github.com/AspenJames/clojure-api.git
+
 
 ## Usage
 
-FIXME: explanation
+### Docker
 
-    $ java -jar clojure-api-0.1.0-standalone.jar [args]
+There are `Dockerfile`s and a `docker-compose.yml` for running this project in
+a REPL or as a standalone binary.
 
-## Options
+To run the REPL:
 
-FIXME: listing of options this app accepts.
+    $ docker-compose up repl
 
-## Examples
+This runs an nREPL server at `nrepl://0.0.0.0:7888`, to which you may connect
+from your favorite editor.
 
-...
+To run the server:
 
-### Bugs
+    $ docker-compose up server
 
-...
+This builds and runs the API server as a standalone JAR.
 
-### Any Other Sections
-### That You Think
-### Might be Useful
+### Leiningen
+
+This project may also be run and managed with
+[leiningen](https://leiningen.org/). Use `lein help` for more information.
+
+To run the REPL in interactive mode:
+
+    $ lein repl
+
+To run the server:
+
+    $ lein run [--port PORT=4200]
+
+
+To build a JAR:
+
+    $ lein uberjar
+
+
 
 ## License
 
-Copyright © 2022 FIXME
+Copyright © 2022 Aspen James
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
