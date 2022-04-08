@@ -9,6 +9,7 @@
                  [ring/ring-core "1.8.2"]          ; Request/response handling
                  [ring/ring-defaults "0.3.3"]      ; Middleware defaults
                  [ring/ring-jetty-adapter "1.8.2"] ; Run Jetty web server
+                 [ring/ring-mock "0.4.0"]          ; Mock requests for testing
                  ]
   :main ^:skip-aot clojure-api.core
   :target-path "target/%s"
