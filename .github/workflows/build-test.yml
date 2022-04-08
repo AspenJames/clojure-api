@@ -58,7 +58,7 @@ jobs:
 
     - name: Run tests
       run: |
-        docker run --rm "ghcr.io/$IMAGE_NAME:test" 'lein test'
+        docker run --rm "$IMAGE_NAME:test" 'lein test'
 
     - name: Push
       uses: docker/build-push-action@v2.10.0
