@@ -43,7 +43,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: ${{ env.IMAGE_NAME }},ghcr.io/${{ env.IMAGE_NAME }}
+        images: ghcr.io/${{ env.IMAGE_NAME }}
         tags: |
           type=sha,prefix={{branch}}-
 
@@ -58,7 +58,7 @@ jobs:
 
     - name: ⚠️Run tests
       run: |
-        docker run --rm "$TEST_NAME" 'lein test'
+        docker run -v "$GITHUB_WORKSPACE:/usr/src/app" --rm "$TEST_NAME" 'lein test'
 
     - name: 🚀Build & push server binary container
       uses: docker/build-push-action@v2.10.0
