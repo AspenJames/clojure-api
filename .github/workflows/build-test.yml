@@ -42,7 +42,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: ${{ env.IMAGE_NAME }}
+        images: ${{ env.IMAGE_NAME }},ghcr.io/${{ env.IMAGE_NAME }}
         tags: |
           type=sha,prefix={{branch}}-
 
@@ -51,7 +51,6 @@ jobs:
       with:
         load: true
         file: repl.Dockerfile
-        labels: ${{ steps.meta.outputs.labels }}
         tags: test
         cache-from: type=local,src=/tmp/.docker-cache
         cache-to: type=local,dest=/tmp/.docker-cache-new
@@ -65,7 +64,6 @@ jobs:
       with:
         push: true
         file: server.Dockerfile
-        labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
         cache-from: type=local,src=/tmp/.docker-cache-new
         cache-to: type=local,dest=/tmp/.docker-cache-new
