@@ -54,7 +54,7 @@ jobs:
         file: server.Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
         cache-from: type=local,src=/tmp/.docker-cache
-        cache-to: type=local,src=/tmp/.docker-cache-new
+        cache-to: type=local,dest=/tmp/.docker-cache-new
 
     - name: Run tests
       run: |
@@ -67,7 +67,7 @@ jobs:
         file: server.Dockerfile
         tags: ${{ steps.meta.outputs.tags }}
         cache-from: type=local,src=/tmp/.docker-cache-new
-        cache-to: type=local,src=/tmp/.docker-cache-new
+        cache-to: type=local,dest=/tmp/.docker-cache-new
 
     - name: Move cache
       run: |
