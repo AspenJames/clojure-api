@@ -10,6 +10,7 @@ on:
 
 env:
   IMAGE_NAME: aspenjames/clojure-api
+  TEST_NAME: aspenjames/clojure-api:test
 
 jobs:
   build:
@@ -51,13 +52,13 @@ jobs:
       with:
         load: true
         file: repl.Dockerfile
-        tags: test
+        tags: ${{ env.TEST_NAME }}
         cache-from: type=local,src=/tmp/.docker-cache
         cache-to: type=local,dest=/tmp/.docker-cache-new
 
     - name: ⚠️Run tests
       run: |
-        docker run --rm "$IMAGE_NAME:test" 'lein test'
+        docker run --rm "$TEST_NAME" 'lein test'
 
     - name: 🚀Build & push server binary container
       uses: docker/build-push-action@v2.10.0
