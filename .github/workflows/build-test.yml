@@ -9,9 +9,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: ghcr.io/aspenjames/clojure-api
-  TEST_TAG: $IMAGE_NAME:test
-  RELEASE_TAG: $IMAGE_NAME:latest
+  IMAGE_NAME: aspenjames/clojure-api
 
 jobs:
   build:
@@ -47,6 +45,7 @@ jobs:
         images: $IMAGE_NAME
         tags: |
           type=sha,prefix={{branch}}-
+          type=raw,value=test
 
     - name: Build
       uses: docker/build-push-action@v2.10.0
@@ -59,7 +58,7 @@ jobs:
 
     - name: Run tests
       run: |
-        docker run --rm "$IMAGE_NAME:$GITHUB_SHA" 'lein test'
+        docker run --rm "ghcr.io/$IMAGE_NAME:test" 'lein test'
 
     - name: Push
       uses: docker/build-push-action@v2.10.0
