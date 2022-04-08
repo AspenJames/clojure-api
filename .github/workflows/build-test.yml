@@ -42,7 +42,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: $IMAGE_NAME
+        images: ${{ env.IMAGE_NAME }}
         tags: |
           type=sha,prefix={{branch}}-
           type=raw,value=test
