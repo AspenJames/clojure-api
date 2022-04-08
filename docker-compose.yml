@@ -11,6 +11,8 @@ services:
       args:
         API_PORT: $API_PORT
         APP_DIR: $APP_DIR
+    volumes:
+      - server_lein_cache:/root/.m2
 
   repl:
     restart: 'unless-stopped'
@@ -25,3 +27,8 @@ services:
         APP_DIR: $APP_DIR
     volumes:
       - .:$APP_DIR
+      - repl_lein_cache:/root/.m2
+
+volumes:
+  repl_lein_cache:
+  server_lein_cache:
